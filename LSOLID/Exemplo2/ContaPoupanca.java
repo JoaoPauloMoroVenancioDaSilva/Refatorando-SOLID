@@ -1,9 +1,16 @@
 package LSOLID.Exemplo2;
 
-public class ContaPoupanca extends ContaBancaria {
+public class ContaPoupanca implements IConta {
+    private double saldo;
+ // Tirei o método sacar() para seguir o L-SOLID
+    @Override
+    public void depositar(double valor) {
+        saldo += valor;
+    }
 
     @Override
-    public void sacar(double valor) {
-        throw new UnsupportedOperationException("Resgate não é permitido direto.");
+    public double getSaldo() {
+        return saldo;
     }
+   
 }

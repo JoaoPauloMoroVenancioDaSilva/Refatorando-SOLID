@@ -5,30 +5,17 @@ import java.util.Scanner;
 
 public class ProcessadorEncomendas {
 
-    public void processar() {
+    public void processar(Encomenda encomenda) {
         try (Scanner sc = new Scanner(System.in)) {
-            System.out.println("Digite o ID da encomenda: ");
-            String idEncomenda = sc.nextLine();
+            String idEncomenda = encomenda.getIdEncomenda();
 
-            System.out.println("Digite o peso (em kg): ");
-            double peso = sc.nextDouble();
-
-            double valorFrete = peso * 10;
-            System.out.println("Valor do frete calculado: " + valorFrete);
+            double peso = encomenda.getPeso();
 
 
-            salvarEmArquivo(idEncomenda, valorFrete);
+            System.out.println("Valor do frete calculado: " + encomenda.getValorFrete());
+
+            SaveArquivo.salvarEmArquivo(idEncomenda, encomenda.getValorFrete());
         } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void salvarEmArquivo(String idEncomenda, double valorFrete) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter("encomendas.txt", true))) {
-            bw.write("ID: " + idEncomenda + " - Frete: " + valorFrete);
-            bw.newLine();
-            System.out.println("Salvo no arquivo encomendas.txt");
-        } catch (IOException e) {
             e.printStackTrace();
         }
     }
